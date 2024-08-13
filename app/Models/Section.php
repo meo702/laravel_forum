@@ -14,4 +14,8 @@ class Section extends Model
     ];
 
     protected $quarded = false;
+
+    public function branches() {
+        return $this->hasMany(Branch::class, 'section_id', 'id');
+    }
 }

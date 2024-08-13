@@ -10,7 +10,9 @@ class Branch extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title'
+        'title',
+        'section_id',
+        'parent_id',
     ];
 
     protected $quarded = false;
