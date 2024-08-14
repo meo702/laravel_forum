@@ -75,10 +75,16 @@ class SectionController extends Controller
      */
     public function destroy(Section $section)
     {
-        //
+        $section->delete();
+        return redirect()->back();
     }
 
     public function branchIndex(Section $section) {
         return BranchResource::collection($section->branches)->resolve();
+    }
+
+    public function branchIndexExcept(Section $section, Branch $branch) {
+        $branches = $section->branches()->where('id', '!=', $branch->id)->get();
+        return BranchResource::collection($branches)->resolve();
     }
 }

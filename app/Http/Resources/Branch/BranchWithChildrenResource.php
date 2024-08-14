@@ -6,7 +6,7 @@ use App\Models\Branch;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class BranchResource extends JsonResource
+class BranchWithChildrenResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -20,6 +20,7 @@ class BranchResource extends JsonResource
             'title' => $this->title,
             'section_id' => $this->section_id,
             'parent_id' => $this->parent_id,
+            'children' => BranchResource::collection($this->children)->resolve(),
         ];
     }
 }
