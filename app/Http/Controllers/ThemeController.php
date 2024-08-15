@@ -30,6 +30,10 @@ class ThemeController extends Controller
      */
     public function store(StoreRequest $request)
     {
+        $data = $request->validated();
+        Theme::create($data);
+
+        return redirect()->route('branches.show', $data['branch_id']);
 
     }
 

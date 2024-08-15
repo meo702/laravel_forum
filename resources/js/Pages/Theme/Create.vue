@@ -23,6 +23,10 @@ import { Link } from '@inertiajs/vue3';
     export default {
         name: "Create",
 
+        props: [
+            'branch'
+        ],
+
         data() {
             return {
                 title: '',
@@ -36,7 +40,11 @@ import { Link } from '@inertiajs/vue3';
 
         methods: {
             store() {
-                this.$inertia.post('/sections', {title: this.title})
+                this.$inertia.post('/themes', {
+                    title: this.title,
+                    description: this.description,
+                    branch_id: this.branch.id
+                })
             }
         },
 

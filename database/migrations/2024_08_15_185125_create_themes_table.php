@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('themes', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->text('description')->nullable();
+            $table->foreignId('branch_id')->index()->constrained('branches');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
