@@ -81,4 +81,8 @@ class BranchController extends Controller
         $branch->delete();
         return redirect()->back();
     }
+
+    public function themeCreate(Branch $branch) {
+        return inertia('Theme/Create');
+    }
 }

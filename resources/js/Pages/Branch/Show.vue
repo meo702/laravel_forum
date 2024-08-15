@@ -2,6 +2,7 @@
     <div>
         <div class="flex items-center mb-4">
             <h3 class="text-xl mr-4">{{ branch.title }}</h3>
+            <Link :href="route('branches.themes.create', branch.id)" class="block w-1/6 mr-4 bg-white border-gray-300 rounded-lg text-center px-2 py-1">+ Тема</Link>
         </div>
 
         <div>
