@@ -32,7 +32,6 @@ class ThemeController extends Controller
     {
         $data = $request->validated();
         Theme::create($data);
-
         return redirect()->route('branches.show', $data['branch_id']);
 
     }
