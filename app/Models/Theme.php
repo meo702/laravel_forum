@@ -18,4 +18,8 @@ class Theme extends Model
     ];
 
     protected $quarded = false;
+
+    public function messages() {
+        return $this->hasMany(Message::class, 'theme_id', 'id');
+    }
 }
