@@ -6,6 +6,7 @@ use App\Http\Requests\User\UpdateRequest;
 use App\Http\Resources\User\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Image;
 
 class UserController extends Controller
 {
@@ -20,9 +21,16 @@ class UserController extends Controller
 
         $path = Storage::disk('public')->put('/avatars', $data['avatar']);
 
+        if(auth()->user()->avatar) {
+            Storage::disk('public')->delete(auth()->user()->avatar);
+        }
+
         auth()->user()->update([
             'avatar' => $path
         ]);
+
+        $path = Image::read('storage/' .$path)->resize(320, 240);
+        $path->save();
 
         return UserResource::make(auth()->user())->resolve();
     }
