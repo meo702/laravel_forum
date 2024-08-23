@@ -24,7 +24,10 @@
                             <p v-html="message.content"></p>
                         </div>
                         <div class="flex items-center justify-end">
-                            <div>
+                            <div class="flex items-center">
+                                <span  class="text-sm mr-1">
+                                    {{ message.likes }}
+                                </span>
                                 <a href="#" @click.prevent="toggleLike(message)">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                     stroke="currentColor" :class="[message.is_liked ? 'fill-red-600' : '', 'size-5 stroke-red-600']">
@@ -88,6 +91,7 @@ import { Link } from '@inertiajs/vue3';
                 // path from route
                 axios.post(`/messages/${message.id}/likes`)
                 .then(res => {
+                    message.is_liked ? message.likes-- : message.likes++
                     message.is_liked = !message.is_liked
                 })
             },

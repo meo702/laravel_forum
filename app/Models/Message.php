@@ -15,6 +15,10 @@ class Message extends Model
         'user_id',
     ];
 
+    protected $withCount = [
+        'likedUsers'
+    ];
+
     protected $quarded = false;
 
     public function getIsLikedAttribute() {
