@@ -38,6 +38,9 @@ Route::middleware('auth')->group(function () {
     Route::get('users/personal', [UserController::class, 'personal'])->name('users.personal');
     Route::patch('users/personal', [UserController::class, 'update'])->name('users.personal');
 
+    // func for likes
+    Route::post('messages/{message}/likes', [MessageController::class, 'toggleLike'])->name('messages.likes.toggle');
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
