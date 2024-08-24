@@ -120,7 +120,7 @@ import { Link } from '@inertiajs/vue3';
             },
             answer(message) {
                 const title =   `<div class="w-full bg-gray-200 border border-gray-300 p-2">
-                                    Ответ пользователю ${message.user.name} ${message.time}
+                                    Ответ пользователю @${message.user.id} ${message.user.name} ${message.time}
                                 </div>`
 
                 const editor = this.$refs.editor
