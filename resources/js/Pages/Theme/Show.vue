@@ -28,6 +28,10 @@
                                 <a @click.prevent="quote(message.content)" href="#" class="text-sm inline-block py-2 px-3 text-center text-white bg-sky-600 border border-sky-700">Цитировать</a>
                             </div>
 
+                            <div class="mr-6">
+                                <a @click.prevent="answer(message)" href="#" class="text-sm inline-block py-2 px-3 text-center text-white bg-sky-600 border border-sky-700">Ответить</a>
+                            </div>
+
                             <div class="flex items-center">
                                 <span  class="text-sm mr-1">
                                     {{ message.likes }}
@@ -113,6 +117,16 @@ import { Link } from '@inertiajs/vue3';
                 const oldText = editor.innerHTML
 
                 editor.innerHTML = `${oldText} <br><blockquote> ${content} </blockquote><br>`
+            },
+            answer(message) {
+                const title =   `<div class="w-full bg-gray-200 border border-gray-300 p-2">
+                                    Ответ пользователю ${message.user.name} ${message.time}
+                                </div>`
+
+                const editor = this.$refs.editor
+                const oldText = editor.innerHTML
+
+                editor.innerHTML = `${oldText} ${title} <blockquote> ${message.content} </blockquote><br>`
             }
         },
 
