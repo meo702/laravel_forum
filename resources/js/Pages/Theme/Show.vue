@@ -24,6 +24,10 @@
                             <p v-html="message.content"></p>
                         </div>
                         <div class="flex items-center justify-end">
+                            <div class="mr-6">
+                                <a @click.prevent="quote(message.content)" href="#" class="text-sm inline-block py-2 px-3 text-center text-white bg-sky-600 border border-sky-700">Цитировать</a>
+                            </div>
+
                             <div class="flex items-center">
                                 <span  class="text-sm mr-1">
                                     {{ message.likes }}
@@ -69,7 +73,7 @@ import { Link } from '@inertiajs/vue3';
 
         data() {
             return {
-                // content: '',
+
             }
         },
 
@@ -83,8 +87,10 @@ import { Link } from '@inertiajs/vue3';
                     content: this.$refs.editor.innerHTML,
                     theme_id: this.theme.id
                 }).then( res => {
-                    console.log(res)
                     this.$refs.editor.innerHTML = ''
+
+                    // public quote
+                    this.theme.messages.push(res.data)
                 })
             },
             toggleLike(message) {
@@ -95,12 +101,31 @@ import { Link } from '@inertiajs/vue3';
                     message.is_liked = !message.is_liked
                 })
             },
+
+            quote(content) {
+                // console.log(window.getSelection().toString());
+
+                if (window.getSelection().toString()) {
+                    content = window.getSelection().toString()
+                }
+
+                const editor = this.$refs.editor
+                const oldText = editor.innerHTML
+
+                editor.innerHTML = `${oldText} <br><blockquote> ${content} </blockquote><br>`
+            }
         },
 
         layout: MainLayot
     }
 </script>
 
-<style scoped>
-
+<style>
+    blockquote {
+        display: block;
+        padding: 4px;
+        padding-left: 6px;
+        border-left: 4px solid skyblue;
+        background-color: #f6f6f6;
+    }
 </style>
