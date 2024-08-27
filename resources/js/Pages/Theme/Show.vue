@@ -25,6 +25,10 @@
                         </div>
                         <div class="flex items-center justify-end">
                             <div class="mr-6">
+                                <a @click.prevent="complaint(message)" href="#" class="text-sm inline-block py-2 px-3 text-center text-red-800 bg-white-700 border border-red-600">Пожаловаться</a>
+                            </div>
+
+                            <div class="mr-6">
                                 <a @click.prevent="quote(message.content)" href="#" class="text-sm inline-block py-2 px-3 text-center text-white bg-sky-600 border border-sky-700">Цитировать</a>
                             </div>
 
@@ -126,7 +130,10 @@ import { Link } from '@inertiajs/vue3';
                 const editor = this.$refs.editor
                 const oldText = editor.innerHTML
 
-                editor.innerHTML = `${oldText} ${title} <blockquote> ${message.content} </blockquote><br>`
+                editor.innerHTML = `${oldText} ${title} <blockquote>${message.content}</blockquote><br>`
+            },
+            complaint(message) {
+
             }
         },
 
