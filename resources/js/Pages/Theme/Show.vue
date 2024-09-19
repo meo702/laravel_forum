@@ -25,7 +25,7 @@
                         </div>
                         <div class="flex items-center justify-end">
                             <div class="mr-6">
-                                <a @click.prevent="complaint(message)" href="#" class="text-sm inline-block py-2 px-3 text-center text-red-800 bg-white-700 border border-red-600">Пожаловаться</a>
+                                <a @click.prevent="openComplaint(message)" href="#" class="text-sm inline-block py-2 px-3 text-center text-red-800 bg-white-700 border border-red-600">Пожаловаться</a>
                             </div>
 
                             <div class="mr-6">
@@ -47,6 +47,11 @@
                                     </svg>
                                 </a>
                             </div>
+                        </div>
+                        <!-- complaint -->
+                        <div class="my-5 flex" v-if="message.is_complaint">
+                            <input v-model="message.body" type="text" class="p-2 border border-gray-300 rounded-lg rounded-r-none w-5/6" placeholder="Ваша жалоба">
+                            <a @click.prevent="complaint(message)" class="block w-1/6 text-center bg-red-700 text-white p-2 rounded-lg rounded-l-none" href="#">Отправить</a>
                         </div>
                     </div>
                 </div>
@@ -72,6 +77,7 @@
 <script>
 import MainLayot from '@/Layouts/MainLayot.vue'
 import { Link } from '@inertiajs/vue3';
+import axios from 'axios';
     export default {
         name: "Show",
 
@@ -132,8 +138,18 @@ import { Link } from '@inertiajs/vue3';
 
                 editor.innerHTML = `${oldText} ${title} <blockquote>${message.content}</blockquote><br>`
             },
+            openComplaint(message) {
+                message.body = ''
+                message.is_complaint = !message.is_complaint
+            },
             complaint(message) {
-
+                // url in web.php
+                axios.post(`/messages/${message.id}/complaints`, {
+                    body: message.body,
+                    theme_id: message.theme_id
+                }).then(res => {
+                    message.body = ''
+                })
             }
         },
 

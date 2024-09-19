@@ -84,4 +84,9 @@ class MessageController extends Controller
     public function toggleLike(Message $message) {
         $message->likedUsers()->toggle(auth()->id());
     }
+
+    public function storeComplaint(\App\Http\Requests\Complaint\StoreRequest $request, Message $message) {
+        $data = $request->validated();
+        $message->complaintedUsers()->attach(auth()->id(), $data);
+    }
 }
