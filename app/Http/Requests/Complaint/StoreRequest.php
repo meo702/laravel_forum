@@ -22,7 +22,7 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'theme_id' => 'required|integer|exists:themes, id',
+            'theme_id' => 'required|integer|exists:themes,id',
             'body' => 'required|string'
         ];
     }

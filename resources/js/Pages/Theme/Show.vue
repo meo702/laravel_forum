@@ -148,6 +148,7 @@ import axios from 'axios';
                     body: message.body,
                     theme_id: message.theme_id
                 }).then(res => {
+                    console.log(res.message);
                     message.body = ''
                 })
             }
