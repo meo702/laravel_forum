@@ -88,5 +88,7 @@ class MessageController extends Controller
     public function storeComplaint(\App\Http\Requests\Complaint\StoreRequest $request, Message $message) {
         $data = $request->validated();
         $message->complaintedUsers()->attach(auth()->id(), $data);
+
+        return MessageResource::make($message)->resolve();
     }
 }

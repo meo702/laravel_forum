@@ -20,7 +20,12 @@
                     </div>
 
                     <div>
+                        <!-- output complaint if we are have this -->
+                        <div class="mb-3" v-if="message.is_not_solved_complaint">
+                            <p class="w-full bg-red-100 border border-red-200 p-2">Ваша жалоба в рассмотрении</p>
+                        </div>
                         <div class="mb-4">
+                            <!-- output all posts -->
                             <p v-html="message.content"></p>
                         </div>
                         <div class="flex items-center justify-end">
@@ -130,7 +135,7 @@ import axios from 'axios';
             },
             answer(message) {
                 const title =   `<div class="w-full bg-gray-200 border border-gray-300 p-2">
-                                    Ответ пользователю @${message.user.id} ${message.user.name} ${message.time}
+                                    Ответ пользователю @${message.user.name} ${message.time}
                                 </div>`
 
                 const editor = this.$refs.editor
@@ -148,8 +153,8 @@ import axios from 'axios';
                     body: message.body,
                     theme_id: message.theme_id
                 }).then(res => {
-                    console.log(res.message);
-                    message.body = ''
+                    // console.log(res.message);
+                    message.is_not_solved_complaint = res.data.is_not_solved_complaint
                 })
             }
         },
