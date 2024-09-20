@@ -2,6 +2,7 @@
     <div>
         <div class="bg-white border-b border-gray-300 py-4">
             <div class="w-1/2 mx-auto">
+                <Link :href="route('dashboard')" class="mr-4">Главная страница</Link>
                 <Link :href="route('sections.index')" class="mr-4">Форум</Link>
                 <Link :href="route('users.personal')">Личный кабинет</Link>
             </div>
