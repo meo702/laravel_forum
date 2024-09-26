@@ -11,7 +11,8 @@ class Image extends Model
 
     protected $fillable = [
         'path',
-        'message_id'
+        'message_id',
+        'user_id'
     ];
 
     protected $quarded = false;

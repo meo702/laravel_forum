@@ -40,6 +40,14 @@ class MessageController extends Controller
             function ($id) {
                 return Str::of($id)->replaceMatches('/@/', '')->value();
         });
+
+        $imgIds = Str::of($data['content'])->matchAll('/img_id=[\d]+/')->unique()->transform(
+            function ($id) {
+                return Str::of($id)->replaceMatches('/img_id=/', '')->value();
+        });
+
+        dd($imgIds);
+
         $message = Message::create($data);
 
         $message->answeredUsers()->attach($ids);

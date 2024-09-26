@@ -157,6 +157,7 @@ import axios from 'axios';
                 message.body = ''
                 message.is_complaint = !message.is_complaint
             },
+
             complaint(message) {
                 // url in web.php
                 axios.post(`/messages/${message.id}/complaints`, {
@@ -174,7 +175,7 @@ import axios from 'axios';
 
                 axios.post('/images', formData)
                 .then( res => {
-                    const image = `<img src="${res.data.url}" />`
+                    const image = `<span hidden>image_id=${res.data.id}</span> <img src="${res.data.url}" />`
 
                     const editor = this.$refs.editor
                     const oldText = editor.innerHTML
