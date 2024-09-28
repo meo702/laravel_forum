@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Message\StoreRequest;
 use App\Http\Requests\Message\UpdateRequest;
 use App\Http\Resources\Message\MessageResource;
+use App\Models\Image;
 use App\Models\Message;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Str;
 
 class MessageController extends Controller
@@ -46,9 +48,25 @@ class MessageController extends Controller
                 return Str::of($id)->replaceMatches('/img_id=/', '')->value();
         });
 
-        dd($imgIds);
+        // dd($imgIds);
 
         $message = Message::create($data);
+
+        // removing unnecessary images from the table storage
+        Image::whereIn('id', $imgIds)->update([
+            'message_id' => $message->id
+        ]);
+
+        Image::where('user_id', auth()->id())
+            ->whereNull('message_id')
+            ->get()
+            ->pluck('path')
+            ->each(function($path) {
+                Storage::disk('public')->delete($path);
+        });
+
+        Image::where('user_id', auth()->id())
+            ->whereNull('message_id')->delete();
 
         $message->answeredUsers()->attach($ids);
 

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\ComplaintController;
+use App\Http\Controllers\Admin\MainController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\MessageController;
@@ -40,6 +42,10 @@ Route::middleware('auth')->group(function () {
     Route::patch('users/personal', [UserController::class, 'update'])->name('users.personal');
 
     Route::post('/images', [ImageController::class, 'store']);
+
+    // admin
+    Route::get('/admin', [MainController::class, 'index'])->name('admin.main.index');
+    Route::get('/admin/complaints', [ComplaintController::class, 'index'])->name('admin.complaints.index');
 
     // func for likes
     Route::post('messages/{message}/likes', [MessageController::class, 'toggleLike'])->name('messages.likes.toggle');

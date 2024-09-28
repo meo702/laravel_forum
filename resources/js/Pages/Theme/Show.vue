@@ -175,7 +175,7 @@ import axios from 'axios';
 
                 axios.post('/images', formData)
                 .then( res => {
-                    const image = `<span hidden>image_id=${res.data.id}</span> <img src="${res.data.url}" />`
+                    const image = `<span hidden>img_id=${res.data.id}</span> <img src="${res.data.url}" />`
 
                     const editor = this.$refs.editor
                     const oldText = editor.innerHTML
