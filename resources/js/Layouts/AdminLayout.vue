@@ -13,12 +13,12 @@
             <div class="w-1/4 bg-white p-4 mr-4 border border-gray-300">
                 <h3 class="text-xl mr-4">Меню</h3>
 
-                <div>
+                <div class="py-4">
                     <div>
-                        <Link :href="route('admin.main.index')">Статистика</Link>
+                        <Link :href="route('admin.main.index')" class="block w-full border-b border-gray-300">Статистика</Link>
                     </div>
                     <div>
-                        <Link :href="route('admin.complaints.index')">Жалобы</Link>
+                        <Link :href="route('admin.complaints.index')" class="block w-full border-b border-gray-300">Жалобы</Link>
                     </div>
                 </div>
             </div>
