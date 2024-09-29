@@ -46,6 +46,7 @@ Route::middleware('auth')->group(function () {
     // admin
     Route::get('/admin', [MainController::class, 'index'])->name('admin.main.index');
     Route::get('/admin/complaints', [ComplaintController::class, 'index'])->name('admin.complaints.index');
+    Route::patch('/admin/complaints/{complaint}', [ComplaintController::class, 'update'])->name('admin.complaints.update');
 
     // func for likes
     Route::post('messages/{message}/likes', [MessageController::class, 'toggleLike'])->name('messages.likes.toggle');

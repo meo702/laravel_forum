@@ -26,10 +26,10 @@
                                     {{ complaint.message_id }}
                                 </Link>
                             </td>
-                            <td class="p-3">{{ complaint.is_solved }}</td>
+                            <td class="p-3 whitespace-nowrap">{{ complaint.is_solved ? 'Решено' : 'В работе' }}</td>
                             <td class="p-3">
-                                <a href="#" class="block w-6 h-6 mx-auto">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                <a @click.prevent="update(complaint)" href="#" class="block w-6 h-6 mx-auto">
+                                    <svg :class="[complaint.is_solved ? 'stroke-green-700' : 'stroke-red-700', 'h-6 w-6']" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                                     </svg>
                                 </a>
@@ -54,6 +54,15 @@ import { Link } from '@inertiajs/vue3';
 
         components: {
             Link
+        },
+
+        methods: {
+            update(complaint) {
+                axios.patch(`/admin/complaints/${complaint.id}`)
+                .then(res => {
+                    complaint.is_solved = res.data.is_solved
+                });
+            }
         },
 
         layout: AdminLayout
